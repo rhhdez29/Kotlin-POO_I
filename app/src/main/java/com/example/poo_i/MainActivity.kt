@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             val inicialHeight=rectanguloView.height
 
             //apply función de alcance que se usa para modificar las propiedades de un objeto recien creado
-            val rectangulo = Rectangulo(R.color.red, inicialWidth, inicialHeight).apply {
+            val rectangulo = Rectangulo(R.color.purple, inicialWidth, inicialHeight).apply {
 
                 x=inicialX
                 y=inicialY
