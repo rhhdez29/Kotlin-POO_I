@@ -1,6 +1,6 @@
 package model
 
-class Rectangulo(var color:Int, var ancho:Int, var alto:Int) {
+open class Rectangulo(var color:Int, var ancho:Int, var alto:Int) { //Se pone como open para que pueda heredar a otras clases
 
     //cordenadas iniciales
 

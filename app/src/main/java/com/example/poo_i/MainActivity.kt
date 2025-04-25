@@ -1,6 +1,8 @@
 package com.example.poo_i
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -10,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import model.Rectangulo
+import model.RectanguloConBordes
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -28,18 +31,31 @@ class MainActivity : AppCompatActivity() {
             val inicialHeight=rectanguloView.height
 
             //apply función de alcance que se usa para modificar las propiedades de un objeto recien creado
-            val rectangulo = Rectangulo(R.color.purple, inicialWidth, inicialHeight).apply {
+            /*val rectangulo = Rectangulo(R.color.purple, inicialWidth, inicialHeight).apply {
 
                 x=inicialX
                 y=inicialY
 
+            }*/
+
+            val rectangulo = RectanguloConBordes(ContextCompat.getColor(this, R.color.purple), inicialWidth, inicialHeight).apply {
+
+                x=inicialX
+                y=inicialY
+                //ContextCompat se usa para que tenga compatibilidad con versiones anteriores de android
+                //this@MainActivity hace referencia al contexto de la actividad que es mainactivity debido a que estamos en una clase anidada
+                //en este caso es apply si no solo necesitariamos this para referirnos al contexto de mainactivity
+                bordeColor=ContextCompat.getColor(this@MainActivity, R.color.purple) //Debido a que usamos apply al intentar usar
+
             }
+
             val btnArriba: Button = findViewById(R.id.btnArriba)
             val btnAbajo: Button = findViewById(R.id.btnAbajo)
             val btnIzquierda: Button = findViewById(R.id.btnIzquierda)
             val btnDerecha: Button = findViewById(R.id.btnDerecha)
             val btnSize: Button = findViewById(R.id.btnSize)
             val btnColor: Button = findViewById(R.id.btnColor)
+            val btnColorBorde:Button=findViewById(R.id.btnColorBorde)
 
             //Funciones para realizar los cambios em la posicion, tamaño y color
             btnArriba.setOnClickListener {
@@ -86,6 +102,12 @@ class MainActivity : AppCompatActivity() {
                 actualizarFigura(rectangulo, rectanguloView)
 
             }
+            btnColorBorde.setOnClickListener {
+
+                rectangulo.cambiarColorBordes(generarColorAleatorio())
+                actualizarFigura(rectangulo, rectanguloView)
+
+            }
 
         }
     }
@@ -101,12 +123,19 @@ class MainActivity : AppCompatActivity() {
         return Color.rgb(rojo,verde,azul)
     }
 
-    private fun actualizarFigura(rectangulo:Rectangulo, rectanguloView: View){ //Funcion que carga todos los cambios del view
+    private fun actualizarFigura(rectangulo:RectanguloConBordes, rectanguloView: View){ //Funcion que carga todos los cambios del view
+
+        val drawable=GradientDrawable() //Creamos una variable de tipor GradientDrawable
+
+        drawable.setColor(rectangulo.color) //Cambiamos el color del rectangulo
+        drawable.setStroke(10, rectangulo.bordeColor) //Cambiamos el color del borde del rectangulo
 
         rectanguloView.layoutParams.width=rectangulo.ancho
         rectanguloView.layoutParams.height=rectangulo.alto
 
-        rectanguloView.setBackgroundColor(rectangulo.color)
+        //rectanguloView.setBackgroundColor(rectangulo.color) //Ya no es necesario porque usamos el drawable
+
+        rectanguloView.background=drawable //Cambiamos el fondo del rectangulo
 
         rectanguloView.x= rectangulo.x.toFloat()
         rectanguloView.y= rectangulo.y.toFloat()
