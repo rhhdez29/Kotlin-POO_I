@@ -104,7 +104,10 @@ class MainActivity : AppCompatActivity() {
             }
             btnColorBorde.setOnClickListener {
 
-                rectangulo.cambiarColorBordes(generarColorAleatorio())
+                //rectangulo.cambiarColorBordes(generarColorAleatorio())
+                rectangulo.cambiarColorBordes(RectanguloConBordes.ManejoColor.generarColorAleatorio()) //Aqui le asignamos el color al borde de la figura por medio de la clase ManejoColor
+                                                                                                       //para acceder a esta clase no es necesiario crear una instancia de la clase RectanguloConBordes
+                                                                                                       //debido a que esta clase es una clase nested dentro de la clase RectanguloConBordes y funciona como estática
                 actualizarFigura(rectangulo, rectanguloView)
 
             }
