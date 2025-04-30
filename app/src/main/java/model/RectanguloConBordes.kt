@@ -3,7 +3,9 @@ package model
 import android.graphics.Color
 
 //Clase que hereda sus caracteristicas y funciones de la clase Rectangulo
-class RectanguloConBordes (color:Int, alto:Int, ancho:Int, var bordeColor:Int= Color.BLACK): Rectangulo(color, ancho, alto) {
+//Las clases por defecto son final, asi como sus funciones lo que significa que no pueden ser heredadas
+// y por lo tanto no se pueden modificar al poner open antes de la clase o funcion permitimos que sean heredadas
+open class RectanguloConBordes (color:Int, alto:Int, ancho:Int, var bordeColor:Int= Color.BLACK): Rectangulo(color, ancho, alto) {
 
     class ManejoColor{ //Clase Nested es como una clase comun pero dentro de otra clase y no puede acceder a las propiedades de la clase que la contiene
                        //Nos sirve para hacer una encapsulacion y tener un mejor manejo de los datos
@@ -28,7 +30,7 @@ class RectanguloConBordes (color:Int, alto:Int, ancho:Int, var bordeColor:Int= C
 
     }
 
-    fun cambiarColorBordes(nuevoColorBorde:Int){
+   open fun cambiarColorBordes(nuevoColorBorde:Int){
 
         bordeColor=nuevoColorBorde
 

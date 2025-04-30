@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import model.Rectangulo
 import model.RectanguloConBordes
+import model.RectanguloSinBordes
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
             }*/
 
-            val rectangulo = RectanguloConBordes(ContextCompat.getColor(this, R.color.purple), inicialWidth, inicialHeight).apply {
+            /*val rectangulo = RectanguloConBordes(ContextCompat.getColor(this, R.color.purple), inicialWidth, inicialHeight).apply {
 
                 x=inicialX
                 y=inicialY
@@ -47,7 +48,17 @@ class MainActivity : AppCompatActivity() {
                 //en este caso es apply si no solo necesitariamos this para referirnos al contexto de mainactivity
                 bordeColor=ContextCompat.getColor(this@MainActivity, R.color.purple) //Debido a que usamos apply al intentar usar
 
+            }*/
+
+            val rectangulo = RectanguloSinBordes(ContextCompat.getColor(this, R.color.purple), inicialWidth, inicialHeight).apply {
+
+                x=inicialX
+                y=inicialY
+
             }
+
+            rectangulo.eliminarBordes()
+            actualizarFigura(rectangulo, rectanguloView)
 
             val btnArriba: Button = findViewById(R.id.btnArriba)
             val btnAbajo: Button = findViewById(R.id.btnAbajo)
