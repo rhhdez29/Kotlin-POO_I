@@ -52,8 +52,11 @@ class MainActivity : AppCompatActivity() {
 
             val rectangulo = RectanguloSinBordes(ContextCompat.getColor(this, R.color.purple), inicialWidth, inicialHeight).apply {
 
-                x=inicialX
-                y=inicialY
+               /* x=inicialX
+                  y=inicialY*/
+
+                dimensiones.x=inicialX
+                dimensiones.y=inicialY
 
             }
 
@@ -144,15 +147,20 @@ class MainActivity : AppCompatActivity() {
         drawable.setColor(rectangulo.color) //Cambiamos el color del rectangulo
         drawable.setStroke(10, rectangulo.bordeColor) //Cambiamos el color del borde del rectangulo
 
-        rectanguloView.layoutParams.width=rectangulo.ancho
-        rectanguloView.layoutParams.height=rectangulo.alto
+        /*rectanguloView.layoutParams.width=rectangulo.ancho
+        rectanguloView.layoutParams.height=rectangulo.alto*/
+        rectanguloView.layoutParams.width=rectangulo.dimensiones.ancho
+        rectanguloView.layoutParams.height=rectangulo.dimensiones.alto
 
         //rectanguloView.setBackgroundColor(rectangulo.color) //Ya no es necesario porque usamos el drawable
 
         rectanguloView.background=drawable //Cambiamos el fondo del rectangulo
 
-        rectanguloView.x= rectangulo.x.toFloat()
-        rectanguloView.y= rectangulo.y.toFloat()
+        /*rectanguloView.x= rectangulo.x.toFloat()
+        rectanguloView.y= rectangulo.y.toFloat()*/
+
+        rectanguloView.x= rectangulo.dimensiones.x.toFloat()
+        rectanguloView.y= rectangulo.dimensiones.y.toFloat()
 
         rectanguloView.requestLayout() //Para hacer efectivos los cambios
 
